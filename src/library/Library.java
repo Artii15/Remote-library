@@ -1,6 +1,6 @@
 package library;
 
-public class Server {
+public class Library {
     public static void main(String[] args) {
 
     }
