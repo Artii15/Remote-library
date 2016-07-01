@@ -6,9 +6,7 @@ import java.rmi.server.UnicastRemoteObject;
 
 public class Server {
     public static void main(String args[]) {
-        if(System.getSecurityManager() == null) {
-            System.setSecurityManager(new SecurityManager());
-        }
+        Security.ensureSecurityManager();
 
         try {
             LibraryService libraryService = new LibraryService();
