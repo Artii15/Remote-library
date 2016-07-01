@@ -8,7 +8,7 @@ public class LibrarianClient {
         Security.ensureSecurityManager();
 
         try {
-            Registry registry = LocateRegistry.getRegistry(args[0]);
+            Registry registry = LocateRegistry.getRegistry();
             Library library = (Library) registry.lookup("library");
 
             System.out.println("Library ready");
