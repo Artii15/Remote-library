@@ -1,5 +1,7 @@
 package library;
 
+import library.books.Book;
+
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 

@@ -6,7 +6,7 @@ public class Copy {
     private static int highestSignature = 0;
 
     public Book book;
-    public Publisher publisher;
+    public String publisher;
     public Date releaseDate;
     public Status status;
     private int signature;
