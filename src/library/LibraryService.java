@@ -10,8 +10,8 @@ class LibraryService implements Library {
     private Catalog catalog = new Catalog();
 
     @Override
-    public void create(Book book) throws RemoteException {
-        catalog.insert(book);
+    public int create(Book book) throws RemoteException {
+        return catalog.insert(book);
     }
 
     @Override

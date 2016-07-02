@@ -1,5 +1,5 @@
 package library.books;
 
-public enum Status {
+enum Status {
     AVAILABLE
 }

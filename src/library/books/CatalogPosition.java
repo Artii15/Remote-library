@@ -1,10 +1,10 @@
 package library.books;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 class CatalogPosition {
     private Book book;
-    private ArrayList<Copy> copies = new ArrayList<>();
+    private HashMap<Integer, Copy> copies = new HashMap<>();
 
     CatalogPosition(Book book) {
         this.book = book;

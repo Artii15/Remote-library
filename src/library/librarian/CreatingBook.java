@@ -21,7 +21,8 @@ class CreatingBook extends LibrarianAction {
     @Override
     public void callback() {
         try {
-            library.create(readInformationAboutBook());
+            int createdBookId = library.create(readInformationAboutBook());
+            System.out.println("Created book id: " + createdBookId);
         } catch (RemoteException e) {
             System.out.println("Book could not be created. Try again later");
         } catch (IOException e) {
