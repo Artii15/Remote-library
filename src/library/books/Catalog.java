@@ -19,4 +19,8 @@ public class Catalog {
 
         return copy.signature;
     }
+
+    public boolean contains(int bookId) {
+        return positions.containsKey(bookId);
+    }
 }

@@ -4,6 +4,7 @@ import library.books.Book;
 import library.books.Catalog;
 import library.books.Copy;
 
+import java.rmi.NoSuchObjectException;
 import java.rmi.RemoteException;
 
 class LibraryService implements Library {
@@ -16,6 +17,11 @@ class LibraryService implements Library {
 
     @Override
     public int create(Copy copy) throws RemoteException {
-        return catalog.insert(copy);
+        if(catalog.contains(copy.bookId)) {
+            return catalog.insert(copy);
+        }
+        else {
+            throw new NoSuchObjectException("Book with id " + copy.bookId + " does not exists");
+        }
     }
 }
