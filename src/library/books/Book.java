@@ -1,13 +1,10 @@
 package library.books;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.io.Serializable;
 
-public class Book {
+public class Book implements Serializable {
     public String title;
-    public Genre genre;
     public String author;
     public String ISBN;
-    public Set<String> tags = new HashSet<>();
     public String description;
 }
