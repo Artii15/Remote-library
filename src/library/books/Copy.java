@@ -1,21 +1,10 @@
 package library.books;
 
-import java.util.Date;
-
 public class Copy {
     private static int highestSignature = 0;
 
-    public Book book;
     public String publisher;
-    public Date releaseDate;
-    public Status status;
-    private int signature;
-
-    public Copy() {
-        signature = ++highestSignature;
-    }
-
-    public int getSignature() {
-        return signature;
-    }
+    public String  releaseDate;
+    public Status status = Status.AVAILABLE;
+    private int signature = ++highestSignature;
 }

@@ -2,19 +2,15 @@ package library.librarian;
 
 import library.Library;
 import library.books.Book;
-import library.books.DuplicateBookEntryException;
-import library.menu.Action;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.rmi.RemoteException;
 
-class CreatingBook implements Action {
-    private Library library;
-
+class CreatingBook extends LibrarianAction {
     CreatingBook(Library library) {
-        this.library = library;
+        super(library);
     }
 
     @Override
@@ -30,8 +26,6 @@ class CreatingBook implements Action {
             System.out.println("Book could not be created. Try again later");
         } catch (IOException e) {
             System.out.println("Invalid data provided");
-        } catch (DuplicateBookEntryException e) {
-            System.out.println("Book with provided ISBN already exists");
         }
     }
 
@@ -44,9 +38,6 @@ class CreatingBook implements Action {
 
         System.out.print("Author: ");
         book.author = reader.readLine();
-
-        System.out.print("ISBN: ");
-        book.ISBN = reader.readLine();
 
         System.out.print("Description: ");
         book.description = reader.readLine();
