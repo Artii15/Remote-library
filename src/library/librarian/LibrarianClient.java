@@ -1,40 +1,24 @@
 package library.librarian;
 
+import library.Client;
 import library.Library;
-import library.Security;
 import library.menu.Exit;
 import library.menu.Menu;
 
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
+public class LibrarianClient extends Client {
 
-public class LibrarianClient {
-    public static void main(String[] args) {
-        Security.ensureSecurityManager();
-
-        try {
-            Registry registry = LocateRegistry.getRegistry();
-            Library library = (Library) registry.lookup("library");
-
-            System.out.println("Library ready");
-
-            loop(library);
-        }
-        catch (Exception e) {
-            System.out.println("Librarian client crashed");
-            e.printStackTrace();
-        }
+    private LibrarianClient() {
+        super("Librarian client");
     }
 
-    private static void loop(Library library) {
-        Menu menu = new Menu();
-        menu.addPosition(new CreatingBook(library));
-        menu.addPosition(new CreatingCopy(library));
-        Exit exitAction = new Exit();
-        menu.addPosition(exitAction);
+    public static void main(String[] args) {
+        LibrarianClient client = new LibrarianClient();
+        client.run();
+    }
 
-        while (!exitAction.exitConditionMet()) {
-            menu.letUserChooseAction();
-        }
+    @Override
+    protected void addMenuPositions(Menu menu) {
+        menu.addAction(new CreatingBook(library));
+        menu.addAction(new CreatingCopy(library));
     }
 }

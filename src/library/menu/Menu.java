@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class Menu {
     private ArrayList<Action> positions = new ArrayList<>();
 
-    public void addPosition(Action position) {
+    public void addAction(Action position) {
         positions.add(position);
     }
 
@@ -19,7 +19,7 @@ public class Menu {
             positions.get(Integer.parseInt(reader.readLine())).callback();
         }
         catch (Exception e) {
-            System.out.println("Invalid action choosen");
+            System.out.println("Invalid action chosen");
         }
     }
 
