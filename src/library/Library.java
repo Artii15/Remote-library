@@ -8,5 +8,5 @@ import java.rmi.RemoteException;
 
 public interface Library extends Remote {
     int create(Book book) throws RemoteException;
-    void create(Copy copy) throws RemoteException;
+    int create(Copy copy) throws RemoteException;
 }

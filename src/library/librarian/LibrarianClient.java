@@ -29,6 +29,7 @@ public class LibrarianClient {
     private static void loop(Library library) {
         Menu menu = new Menu();
         menu.addPosition(new CreatingBook(library));
+        menu.addPosition(new CreatingCopy(library));
         Exit exitAction = new Exit();
         menu.addPosition(exitAction);
 

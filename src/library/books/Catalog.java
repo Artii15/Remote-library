@@ -11,4 +11,12 @@ public class Catalog {
 
         return book.id;
     }
+
+    public int insert(Copy copy) {
+        copy.signature = ++Copy.highestSignature;
+        copy.status = Status.AVAILABLE;
+        positions.get(copy.bookId).addCopy(copy);
+
+        return copy.signature;
+    }
 }

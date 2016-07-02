@@ -8,5 +8,5 @@ public class Copy {
     
     public String publisher;
     public String  releaseDate;
-    public Status status = Status.AVAILABLE;
+    public Status status;
 }

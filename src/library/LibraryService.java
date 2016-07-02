@@ -15,7 +15,7 @@ class LibraryService implements Library {
     }
 
     @Override
-    public void create(Copy copy) throws RemoteException {
-
+    public int create(Copy copy) throws RemoteException {
+        return catalog.insert(copy);
     }
 }

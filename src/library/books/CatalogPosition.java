@@ -9,4 +9,8 @@ class CatalogPosition {
     CatalogPosition(Book book) {
         this.book = book;
     }
+
+    void addCopy(Copy copy) {
+        copies.put(copy.signature, copy);
+    }
 }
