@@ -2,9 +2,11 @@ package library;
 
 import library.books.Book;
 import library.books.Catalog;
+import library.books.CatalogPosition;
 import library.books.Copy;
 
 import java.rmi.RemoteException;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 class LibraryService implements Library {
@@ -23,5 +25,10 @@ class LibraryService implements Library {
         else {
             throw new NoSuchElementException("Book with id " + copy.bookId + " doesn't exist");
         }
+    }
+
+    @Override
+    public List<CatalogPosition> searchByTitle(String title) throws RemoteException {
+        return catalog.searchByTitle(title);
     }
 }

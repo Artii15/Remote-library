@@ -1,6 +1,9 @@
 package library.books;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.regex.Pattern;
 
 public class Catalog {
     private HashMap<Integer, CatalogPosition> positions = new HashMap<>();
@@ -22,5 +25,18 @@ public class Catalog {
 
     public boolean contains(int bookId) {
         return positions.containsKey(bookId);
+    }
+
+    public List<CatalogPosition> searchByTitle(String title) {
+        String normalizedTitle = title.toLowerCase().trim();
+        LinkedList<CatalogPosition> matchedPositions = new LinkedList<>();
+
+        positions.forEach((id, position) -> {
+            if(position.book.title.toLowerCase().trim().matches(String.format("*%s*", normalizedTitle))) {
+                matchedPositions.add(position);
+            }
+        });
+
+        return matchedPositions;
     }
 }

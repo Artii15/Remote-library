@@ -16,6 +16,6 @@ public class ReaderClient extends Client {
 
     @Override
     protected void addMenuPositions(Menu menu) {
-
+        menu.addAction(new BooksSearching(library));
     }
 }

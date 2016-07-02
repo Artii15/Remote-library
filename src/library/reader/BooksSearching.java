@@ -1,21 +1,55 @@
 package library.reader;
 
 import library.Library;
+import library.books.CatalogPosition;
+import library.books.Copy;
 import library.menu.LibraryAction;
 
-public class BooksSearching extends LibraryAction {
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.rmi.RemoteException;
+import java.util.Collection;
+import java.util.List;
 
-    public BooksSearching(Library library) {
+class BooksSearching extends LibraryAction {
+
+    BooksSearching(Library library) {
         super(library);
     }
 
     @Override
     public String getLabel() {
-        return null;
+        return "Books searching";
     }
 
     @Override
     public void callback() {
+        try {
+            List<CatalogPosition> catalogPositions = library.searchByTitle(readTitleFromUser());
+            displayFoundPositions(catalogPositions);
+        } catch (RemoteException e) {
+            System.out.println("Service temporary unavailable. Try again later.");
+        } catch (IOException e) {
+            System.out.println("Invalid data provided");
+        }
+    }
 
+    private String readTitleFromUser() throws IOException {
+        System.out.println("Searched title: ");
+        return new BufferedReader(new InputStreamReader(System.in)).readLine();
+    }
+
+    private void displayFoundPositions(List<CatalogPosition> positions) {
+        for (CatalogPosition position: positions) {
+            System.out.println(position.book.title + ", " + position.book.author);
+            displayCopies(position.copies.values());
+        }
+    }
+
+    private void displayCopies(Collection<Copy> copies) {
+        for(Copy copy: copies) {
+            System.out.println("\t" + copy.signature + " " + copy.publisher + " " + copy.status);
+        }
     }
 }
