@@ -1,8 +1,6 @@
 package library.librarian;
 
 import library.Client;
-import library.Library;
-import library.menu.Exit;
 import library.menu.Menu;
 
 public class LibrarianClient extends Client {

@@ -14,7 +14,7 @@ public abstract class Client {
         this.name = name;
     }
 
-    protected void run() {
+    protected final void run() {
         Security.ensureSecurityManager();
 
         try {

@@ -2,13 +2,14 @@ package library.librarian;
 
 import library.Library;
 import library.books.Book;
+import library.menu.LibraryAction;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.rmi.RemoteException;
 
-class CreatingBook extends LibrarianAction {
+class CreatingBook extends LibraryAction {
     CreatingBook(Library library) {
         super(library);
     }

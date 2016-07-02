@@ -2,6 +2,7 @@ package library.librarian;
 
 import library.Library;
 import library.books.Copy;
+import library.menu.LibraryAction;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,7 +10,7 @@ import java.io.InputStreamReader;
 import java.rmi.RemoteException;
 import java.util.NoSuchElementException;
 
-class CreatingCopy extends LibrarianAction {
+class CreatingCopy extends LibraryAction {
 
     CreatingCopy(Library library) {
         super(library);

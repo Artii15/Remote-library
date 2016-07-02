@@ -4,7 +4,6 @@ import library.books.Book;
 import library.books.Catalog;
 import library.books.Copy;
 
-import java.rmi.NoSuchObjectException;
 import java.rmi.RemoteException;
 import java.util.NoSuchElementException;
 
