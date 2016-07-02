@@ -1,7 +1,9 @@
 package library.books;
 
-public class Copy {
-    public static int highestSignature = 0;
+import java.io.Serializable;
+
+public class Copy implements Serializable {
+    static int highestSignature = 0;
 
     public int bookId;
     public Integer signature = null;

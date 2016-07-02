@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Book implements Serializable {
     static int highestId = 0;
 
-    public Integer id = null;
+    Integer id = null;
     public String title;
     public String author;
     public String description;

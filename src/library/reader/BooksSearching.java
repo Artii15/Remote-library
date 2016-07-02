@@ -29,6 +29,7 @@ class BooksSearching extends LibraryAction {
             List<CatalogPosition> catalogPositions = library.searchByTitle(readTitleFromUser());
             displayFoundPositions(catalogPositions);
         } catch (RemoteException e) {
+            e.printStackTrace();
             System.out.println("Service temporary unavailable. Try again later.");
         } catch (IOException e) {
             System.out.println("Invalid data provided");
@@ -36,8 +37,9 @@ class BooksSearching extends LibraryAction {
     }
 
     private String readTitleFromUser() throws IOException {
-        System.out.println("Searched title: ");
-        return new BufferedReader(new InputStreamReader(System.in)).readLine();
+        System.out.print("Searched title: ");
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        return reader.readLine();
     }
 
     private void displayFoundPositions(List<CatalogPosition> positions) {
