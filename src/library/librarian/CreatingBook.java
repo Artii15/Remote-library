@@ -2,6 +2,7 @@ package library.librarian;
 
 import library.Library;
 import library.books.Book;
+import library.books.DuplicateBookEntryException;
 import library.menu.Action;
 
 import java.io.BufferedReader;
@@ -29,6 +30,8 @@ class CreatingBook implements Action {
             System.out.println("Book could not be created. Try again later");
         } catch (IOException e) {
             System.out.println("Invalid data provided");
+        } catch (DuplicateBookEntryException e) {
+            System.out.println("Book with provided ISBN already exists");
         }
     }
 
