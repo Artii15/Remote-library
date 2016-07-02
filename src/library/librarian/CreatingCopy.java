@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.rmi.RemoteException;
+import java.util.NoSuchElementException;
 
 class CreatingCopy extends LibrarianAction {
 
@@ -24,6 +25,8 @@ class CreatingCopy extends LibrarianAction {
         try {
             int copyId = library.create(readInformationAboutCopy());
             System.out.println("Created copy signature: " + copyId);
+        } catch (NoSuchElementException e) {
+            System.out.println("There are no books with provided id");
         } catch (RemoteException e) {
             System.out.println("Could not create copy. Try again later");
         } catch (IOException e) {
