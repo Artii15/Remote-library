@@ -10,14 +10,14 @@ public class Catalog {
     private HashMap<Integer, CatalogPosition> positions = new HashMap<>();
     private HashMap<Integer, Copy> copies = new HashMap<>();
 
-    public int insert(Book book) {
+    public synchronized int insert(Book book) {
         book.id = ++Book.highestId;
         positions.put(book.id, new CatalogPosition(book));
 
         return book.id;
     }
 
-    public int insert(Copy copy) {
+    public synchronized int insert(Copy copy) {
         copy.signature = ++Copy.highestSignature;
         copy.status = Status.AVAILABLE;
         positions.get(copy.bookId).addCopy(copy);
