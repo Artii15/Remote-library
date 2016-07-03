@@ -8,6 +8,7 @@ import library.exceptions.NoSuchReaderException;
 import library.reader.*;
 import library.reader.OrderNotification;
 
+import java.rmi.RemoteException;
 import java.util.LinkedList;
 import java.util.Map;
 
@@ -45,7 +46,12 @@ public class Orders {
     private void realizeOrder() {
         if(!orders.isEmpty()) {
             Order order = orders.removeFirst();
-
+            try {
+                order.notification.notify(order);
+            } catch (RemoteException e) {
+                order.reader.orderedCopies.remove(order.copy.signature);
+                System.out.println("Could not send copy to the client");
+            }
         }
     }
 }
