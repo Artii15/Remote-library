@@ -42,4 +42,9 @@ class LibraryService implements Library {
 
         return reader.id;
     }
+
+    @Override
+    public boolean order(int readerId, int signature) throws RemoteException {
+        return false;
+    }
 }

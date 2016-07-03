@@ -6,6 +6,7 @@ import java.util.List;
 
 public class Catalog {
     private HashMap<Integer, CatalogPosition> positions = new HashMap<>();
+    private HashMap<Integer, Copy> copies = new HashMap<>();
 
     public int insert(Book book) {
         book.id = ++Book.highestId;
@@ -18,6 +19,7 @@ public class Catalog {
         copy.signature = ++Copy.highestSignature;
         copy.status = Status.AVAILABLE;
         positions.get(copy.bookId).addCopy(copy);
+        copies.put(copy.signature, copy);
 
         return copy.signature;
     }
