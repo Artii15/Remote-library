@@ -12,8 +12,9 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 class LibraryService implements Library {
-    private Catalog catalog = new Catalog();
     private HashMap<Integer, Reader> readers = new HashMap<>();
+    private Catalog catalog = new Catalog();
+    private Orders orders = new Orders(readers, catalog);
 
     @Override
     public int create(Book book) throws RemoteException {
@@ -44,7 +45,7 @@ class LibraryService implements Library {
     }
 
     @Override
-    public boolean order(int readerId, int signature) throws RemoteException {
-        return false;
+    public void order(int readerId, int signature) throws RemoteException {
+        orders.addOrder(readerId, signature);
     }
 }

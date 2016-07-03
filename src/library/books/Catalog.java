@@ -1,5 +1,7 @@
 package library.books;
 
+import library.exceptions.NoSuchCopyException;
+
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -39,5 +41,12 @@ public class Catalog {
         });
 
         return matchedPositions;
+    }
+
+    public Copy getCopy(int signature) throws NoSuchCopyException {
+        if(!copies.containsKey(signature)) {
+            throw new NoSuchCopyException();
+        }
+        return copies.get(signature);
     }
 }
