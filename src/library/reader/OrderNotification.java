@@ -2,8 +2,12 @@ package library.reader;
 
 import library.Order;
 
-import java.rmi.Remote;
+import java.rmi.RemoteException;
 
-public interface OrderNotification extends Remote {
-    void notify(Order order);
+public class OrderNotification implements library.OrderNotification {
+
+    @Override
+    public void notify(Order order) throws RemoteException {
+        System.out.println(String.format("Your order %d is ready", order.copy.signature));
+    }
 }
