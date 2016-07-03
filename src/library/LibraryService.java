@@ -5,6 +5,7 @@ import library.books.Catalog;
 import library.books.CatalogPosition;
 import library.books.Copy;
 import library.exceptions.AlreadyOrderedException;
+import library.exceptions.CopyNotAvailableException;
 import library.exceptions.NoSuchCopyException;
 import library.exceptions.NoSuchReaderException;
 import library.reader.*;
@@ -49,7 +50,7 @@ class LibraryService implements Library {
     }
 
     @Override
-    public void order(int readerId, int signature, library.OrderNotification orderNotification) throws RemoteException, AlreadyOrderedException, NoSuchCopyException, NoSuchReaderException {
+    public void order(int readerId, int signature, library.OrderNotification orderNotification) throws RemoteException, AlreadyOrderedException, NoSuchCopyException, NoSuchReaderException, CopyNotAvailableException {
         orders.addOrder(readerId, signature, orderNotification);
     }
 }

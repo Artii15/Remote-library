@@ -4,6 +4,7 @@ import library.books.Catalog;
 import library.books.Copy;
 import library.books.Status;
 import library.exceptions.AlreadyOrderedException;
+import library.exceptions.CopyNotAvailableException;
 import library.exceptions.NoSuchCopyException;
 import library.exceptions.NoSuchReaderException;
 import library.reader.*;
@@ -22,12 +23,16 @@ public class Orders {
         this.catalog = catalog;
     }
 
-    public void addOrder(int readerId, int signature, library.OrderNotification orderNotification) throws NoSuchReaderException, NoSuchCopyException, AlreadyOrderedException {
+    public void addOrder(int readerId, int signature, library.OrderNotification orderNotification) throws NoSuchReaderException, NoSuchCopyException, AlreadyOrderedException, CopyNotAvailableException {
         if(!readers.containsKey(readerId)) {
             throw new NoSuchReaderException();
         }
         Reader reader = readers.get(readerId);
         Copy copy = catalog.getCopy(signature);
+
+        if(copy.status != Status.AVAILABLE) {
+            throw new CopyNotAvailableException();
+        }
 
         Order order = new Order(reader, copy, orderNotification);
 

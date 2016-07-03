@@ -2,6 +2,7 @@ package library.reader;
 
 import library.Library;
 import library.exceptions.AlreadyOrderedException;
+import library.exceptions.CopyNotAvailableException;
 import library.exceptions.NoSuchCopyException;
 import library.exceptions.NoSuchReaderException;
 import library.menu.LibraryAction;
@@ -14,8 +15,11 @@ import java.rmi.server.UnicastRemoteObject;
 
 public class BookOrdering extends LibraryAction {
 
-    public BookOrdering(Library library) {
+    private ReaderClient client;
+
+    public BookOrdering(Library library, ReaderClient client) {
         super(library);
+        this.client = client;
     }
 
     @Override
@@ -35,7 +39,7 @@ public class BookOrdering extends LibraryAction {
 
             int signature = Integer.parseInt(inputReader.readLine());
 
-            library.OrderNotification notification = (library.OrderNotification) UnicastRemoteObject.exportObject(new OrderNotification(), 0);
+            library.OrderNotification notification = (library.OrderNotification) UnicastRemoteObject.exportObject(new OrderNotification(client), 0);
 
             library.order(readerId, signature, notification);
             System.out.println("Book ordered");
@@ -49,6 +53,8 @@ public class BookOrdering extends LibraryAction {
             System.out.println("Invalid reader id. Register in library before you try to borrow books.");
         } catch (NoSuchCopyException e) {
             System.out.println("Copy with such signature does not exist");
+        } catch (CopyNotAvailableException e) {
+            System.out.println("Chosen copy is not available at the moment");
         }
     }
 }
