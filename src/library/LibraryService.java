@@ -4,6 +4,9 @@ import library.books.Book;
 import library.books.Catalog;
 import library.books.CatalogPosition;
 import library.books.Copy;
+import library.exceptions.AlreadyOrderedException;
+import library.exceptions.NoSuchCopyException;
+import library.exceptions.NoSuchReaderException;
 import library.reader.Reader;
 
 import java.rmi.RemoteException;
@@ -45,7 +48,7 @@ class LibraryService implements Library {
     }
 
     @Override
-    public void order(int readerId, int signature) throws RemoteException {
+    public void order(int readerId, int signature) throws RemoteException, AlreadyOrderedException, NoSuchCopyException, NoSuchReaderException {
         orders.addOrder(readerId, signature);
     }
 }

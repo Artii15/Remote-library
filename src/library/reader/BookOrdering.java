@@ -1,6 +1,9 @@
 package library.reader;
 
 import library.Library;
+import library.exceptions.AlreadyOrderedException;
+import library.exceptions.NoSuchCopyException;
+import library.exceptions.NoSuchReaderException;
 import library.menu.LibraryAction;
 
 import java.io.BufferedReader;
@@ -31,12 +34,18 @@ public class BookOrdering extends LibraryAction {
 
             int signature = Integer.parseInt(inputReader.readLine());
 
-            boolean ordered = library.order(readerId, signature);
-            System.out.println(ordered ? "Book ordered" : "Invalid data provided");
+            library.order(readerId, signature);
+            System.out.println("Book ordered");
         } catch (RemoteException e) {
             System.out.println("Could not order book. Try again later");
         } catch (IOException e) {
             System.out.println("Invalid data provided");
+        } catch (AlreadyOrderedException e) {
+            System.out.println("You have already ordered this book");
+        } catch (NoSuchReaderException e) {
+            System.out.println("Invalid reader id. Register in library before you try to borrow books.");
+        } catch (NoSuchCopyException e) {
+            System.out.println("Copy with such signature does not exist");
         }
     }
 }

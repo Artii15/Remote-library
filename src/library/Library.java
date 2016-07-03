@@ -3,6 +3,9 @@ package library;
 import library.books.Book;
 import library.books.CatalogPosition;
 import library.books.Copy;
+import library.exceptions.AlreadyOrderedException;
+import library.exceptions.NoSuchCopyException;
+import library.exceptions.NoSuchReaderException;
 import library.reader.Reader;
 
 import java.rmi.Remote;
@@ -15,5 +18,5 @@ public interface Library extends Remote {
     int create(Copy copy) throws RemoteException, NoSuchElementException;
     List<CatalogPosition> searchByTitle(String title) throws RemoteException;
     int register(Reader reader) throws RemoteException;
-    void order(int readerId, int signature) throws RemoteException;
+    void order(int readerId, int signature) throws RemoteException, AlreadyOrderedException, NoSuchCopyException, NoSuchReaderException;
 }
