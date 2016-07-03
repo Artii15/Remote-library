@@ -2,13 +2,18 @@ package library.reader;
 
 import library.Order;
 
-import java.io.Serializable;
 import java.rmi.RemoteException;
 
-public class OrderNotification implements library.OrderNotification, Serializable {
+public class OrderNotification implements library.OrderNotification {
+
+    private ReaderClient client;
+
+    public OrderNotification(ReaderClient client) {
+        this.client = client;
+    }
 
     @Override
     public void notify(Order order) throws RemoteException {
-        System.out.println(String.format("Your order %d is ready", order.copy.signature));
+        client.acceptOrder(order);
     }
 }

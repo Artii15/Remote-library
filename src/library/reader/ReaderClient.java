@@ -1,6 +1,7 @@
 package library.reader;
 
 import library.Client;
+import library.Order;
 import library.menu.Menu;
 
 public class ReaderClient extends Client {
@@ -19,5 +20,9 @@ public class ReaderClient extends Client {
         menu.addAction(new BooksSearching(library));
         menu.addAction(new ReaderRegistration(library));
         menu.addAction(new BookOrdering(library));
+    }
+
+    public void acceptOrder(Order order) {
+        System.out.println(String.format("Your order %d is ready", order.copy.signature));
     }
 }
