@@ -3,7 +3,9 @@ package library;
 import library.books.Copy;
 import library.reader.Reader;
 
-public class Order {
+import java.io.Serializable;
+
+public class Order implements Serializable {
     public Reader reader;
     public Copy copy;
     public OrderNotification notification;

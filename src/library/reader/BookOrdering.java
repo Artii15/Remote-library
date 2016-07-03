@@ -10,6 +10,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 
 public class BookOrdering extends LibraryAction {
 
@@ -27,14 +28,16 @@ public class BookOrdering extends LibraryAction {
         BufferedReader inputReader = new BufferedReader(new InputStreamReader(System.in));
 
         try {
-            System.out.print("Reader id:");
+            System.out.print("Reader id: ");
             int readerId = Integer.parseInt(inputReader.readLine());
 
-            System.out.print("Book copy signature:");
+            System.out.print("Book copy signature: ");
 
             int signature = Integer.parseInt(inputReader.readLine());
 
-            library.order(readerId, signature, new library.reader.OrderNotification());
+            library.OrderNotification notification = (library.OrderNotification) UnicastRemoteObject.exportObject(new OrderNotification(), 0);
+
+            library.order(readerId, signature, notification);
             System.out.println("Book ordered");
         } catch (RemoteException e) {
             System.out.println("Could not order book. Try again later");

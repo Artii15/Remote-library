@@ -49,7 +49,7 @@ class LibraryService implements Library {
     }
 
     @Override
-    public void order(int readerId, int signature, OrderNotification orderNotification) throws RemoteException, AlreadyOrderedException, NoSuchCopyException, NoSuchReaderException {
+    public void order(int readerId, int signature, library.OrderNotification orderNotification) throws RemoteException, AlreadyOrderedException, NoSuchCopyException, NoSuchReaderException {
         orders.addOrder(readerId, signature, orderNotification);
     }
 }
