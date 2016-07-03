@@ -34,7 +34,7 @@ public class BookOrdering extends LibraryAction {
 
             int signature = Integer.parseInt(inputReader.readLine());
 
-            library.order(readerId, signature);
+            library.order(readerId, signature, new library.reader.OrderNotification());
             System.out.println("Book ordered");
         } catch (RemoteException e) {
             System.out.println("Could not order book. Try again later");

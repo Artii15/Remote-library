@@ -7,7 +7,8 @@ import library.books.Copy;
 import library.exceptions.AlreadyOrderedException;
 import library.exceptions.NoSuchCopyException;
 import library.exceptions.NoSuchReaderException;
-import library.reader.Reader;
+import library.reader.*;
+import library.reader.OrderNotification;
 
 import java.rmi.RemoteException;
 import java.util.HashMap;
@@ -48,7 +49,7 @@ class LibraryService implements Library {
     }
 
     @Override
-    public void order(int readerId, int signature) throws RemoteException, AlreadyOrderedException, NoSuchCopyException, NoSuchReaderException {
-        orders.addOrder(readerId, signature);
+    public void order(int readerId, int signature, OrderNotification orderNotification) throws RemoteException, AlreadyOrderedException, NoSuchCopyException, NoSuchReaderException {
+        orders.addOrder(readerId, signature, orderNotification);
     }
 }

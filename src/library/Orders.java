@@ -5,7 +5,8 @@ import library.books.Copy;
 import library.exceptions.AlreadyOrderedException;
 import library.exceptions.NoSuchCopyException;
 import library.exceptions.NoSuchReaderException;
-import library.reader.Reader;
+import library.reader.*;
+import library.reader.OrderNotification;
 
 import java.util.LinkedList;
 import java.util.Map;
@@ -20,20 +21,20 @@ public class Orders {
         this.catalog = catalog;
     }
 
-    public void addOrder(int readerId, int signature) throws NoSuchReaderException, NoSuchCopyException, AlreadyOrderedException {
+    public void addOrder(int readerId, int signature, OrderNotification orderNotification) throws NoSuchReaderException, NoSuchCopyException, AlreadyOrderedException {
         if(!readers.containsKey(readerId)) {
             throw new NoSuchReaderException();
         }
         Reader reader = readers.get(readerId);
         Copy copy = catalog.getCopy(signature);
 
-        Order order = new Order(reader, copy);
+        Order order = new Order(reader, copy, orderNotification);
 
         if(wasAlreadyOrdered(order)) {
             throw new AlreadyOrderedException();
         }
         reader.orderedCopies.add(copy.signature);
-        orders.add(new Order(reader, copy));
+        orders.add(order);
         realizeOrder();
     }
 
