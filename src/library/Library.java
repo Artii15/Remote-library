@@ -15,4 +15,5 @@ public interface Library extends Remote {
     int create(Copy copy) throws RemoteException, NoSuchElementException;
     List<CatalogPosition> searchByTitle(String title) throws RemoteException;
     int register(Reader reader) throws RemoteException;
+    boolean order(int readerId, int signature) throws RemoteException;
 }
