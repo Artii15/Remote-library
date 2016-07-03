@@ -34,9 +34,17 @@ public class Orders {
         }
         reader.orderedCopies.add(copy.signature);
         orders.add(new Order(reader, copy));
+        realizeOrder();
     }
 
     private boolean wasAlreadyOrdered(Order order) {
         return order.reader.orderedCopies.contains(order.copy.signature);
+    }
+
+    private void realizeOrder() {
+        if(!orders.isEmpty()) {
+            Order order = orders.removeFirst();
+
+        }
     }
 }
