@@ -2,11 +2,11 @@ package library;
 
 import library.books.Catalog;
 import library.books.Copy;
+import library.books.Status;
 import library.exceptions.AlreadyOrderedException;
 import library.exceptions.NoSuchCopyException;
 import library.exceptions.NoSuchReaderException;
 import library.reader.*;
-import library.reader.OrderNotification;
 
 import java.rmi.RemoteException;
 import java.util.LinkedList;
@@ -46,10 +46,12 @@ public class Orders {
     private void realizeOrder() {
         if(!orders.isEmpty()) {
             Order order = orders.removeFirst();
+            order.copy.status = Status.BORROWED;
             try {
                 order.notification.notify(order);
             } catch (RemoteException e) {
                 order.reader.orderedCopies.remove(order.copy.signature);
+                order.copy.status = Status.AVAILABLE;
                 System.out.println("Could not send copy to the client");
             }
         }
