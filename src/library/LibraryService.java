@@ -36,7 +36,7 @@ class LibraryService implements Library {
     }
 
     @Override
-    public int register(Reader reader) {
+    public int register(Reader reader) throws RemoteException {
         reader.id = ++Reader.highestId;
         readers.put(reader.id, reader);
 

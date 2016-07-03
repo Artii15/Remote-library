@@ -1,6 +1,8 @@
 package library.reader;
 
-public class Reader {
+import java.io.Serializable;
+
+public class Reader implements Serializable {
     public static int highestId = 0;
 
     public Integer id = null;
