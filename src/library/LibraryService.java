@@ -54,7 +54,7 @@ class LibraryService implements Library {
     }
 
     @Override
-    public void returnOrderedCopy(int readerId, int signature) throws NoSuchReaderException, NoSuchCopyException {
+    public void returnOrderedCopy(int readerId, int signature) throws RemoteException, NoSuchReaderException, NoSuchCopyException {
         orders.returnOrderedCopy(readerId, signature);
     }
 }
