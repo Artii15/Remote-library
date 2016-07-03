@@ -2,7 +2,6 @@ package library.reader;
 
 import library.Library;
 import library.exceptions.AlreadyOrderedException;
-import library.exceptions.CopyNotAvailableException;
 import library.exceptions.NoSuchCopyException;
 import library.exceptions.NoSuchReaderException;
 import library.menu.LibraryAction;
@@ -53,8 +52,6 @@ public class BookOrdering extends LibraryAction {
             System.out.println("Invalid reader id. Register in library before you try to borrow books.");
         } catch (NoSuchCopyException e) {
             System.out.println("Copy with such signature does not exist");
-        } catch (CopyNotAvailableException e) {
-            System.out.println("Chosen copy is not available at the moment");
         }
     }
 }

@@ -24,6 +24,6 @@ public class ReaderClient extends Client {
     }
 
     public void acceptOrder(Order order) {
-        System.out.println(String.format("Your order %d is ready", order.copy.signature));
+        System.out.println(String.format("Order for reader %d, signature %d is ready", order.reader.id, order.copy.signature));
     }
 }
