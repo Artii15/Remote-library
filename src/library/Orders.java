@@ -61,4 +61,17 @@ public class Orders {
             }
         }
     }
+
+    public void returnOrderedCopy(int readerId, int signature) throws NoSuchReaderException, NoSuchCopyException {
+        if(!readers.containsKey(readerId)) {
+            throw new NoSuchReaderException();
+        }
+        Reader reader = readers.get(readerId);
+        if(!reader.orderedCopies.contains(signature)) {
+            throw new NoSuchCopyException();
+        }
+
+        reader.orderedCopies.remove(signature);
+        catalog.getCopy(signature).status = Status.AVAILABLE;
+    }
 }

@@ -20,6 +20,7 @@ public class ReaderClient extends Client {
         menu.addAction(new BooksSearching(library));
         menu.addAction(new ReaderRegistration(library));
         menu.addAction(new BookOrdering(library, this));
+        menu.addAction(new BooksReturning(library));
     }
 
     public void acceptOrder(Order order) {

@@ -9,7 +9,6 @@ import library.exceptions.CopyNotAvailableException;
 import library.exceptions.NoSuchCopyException;
 import library.exceptions.NoSuchReaderException;
 import library.reader.*;
-import library.reader.OrderNotification;
 
 import java.rmi.RemoteException;
 import java.util.HashMap;
@@ -52,5 +51,10 @@ class LibraryService implements Library {
     @Override
     public void order(int readerId, int signature, library.OrderNotification orderNotification) throws RemoteException, AlreadyOrderedException, NoSuchCopyException, NoSuchReaderException, CopyNotAvailableException {
         orders.addOrder(readerId, signature, orderNotification);
+    }
+
+    @Override
+    public void returnOrderedCopy(int readerId, int signature) throws NoSuchReaderException, NoSuchCopyException {
+        orders.returnOrderedCopy(readerId, signature);
     }
 }

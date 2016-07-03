@@ -20,4 +20,5 @@ public interface Library extends Remote {
     List<CatalogPosition> searchByTitle(String title) throws RemoteException;
     int register(Reader reader) throws RemoteException;
     void order(int readerId, int signature, OrderNotification orderNotification) throws RemoteException, AlreadyOrderedException, NoSuchCopyException, NoSuchReaderException, CopyNotAvailableException;
+    void returnOrderedCopy(int readerId, int signature) throws NoSuchReaderException, NoSuchCopyException;
 }
