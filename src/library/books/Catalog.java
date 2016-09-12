@@ -3,7 +3,8 @@ package library.books;
 import library.exceptions.NoSuchCopyException;
 
 import java.util.HashMap;
-import java.util.stream.Stream;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Catalog {
     private HashMap<Integer, CatalogPosition> positions = new HashMap<>();
@@ -29,11 +30,11 @@ public class Catalog {
         return positions.containsKey(bookId);
     }
 
-    public Stream<CatalogPosition> searchByTitle(String title) {
+    public List<CatalogPosition> searchByTitle(String title) {
         String normalizedTitle = title.toLowerCase().trim();
         return positions.values().stream().filter(position -> {
         	return position.book.title.toLowerCase().trim().matches(String.format(".*%s.*", normalizedTitle));
-        });
+        }).collect(Collectors.toList());
     }
 
     public Copy getCopy(int signature) throws NoSuchCopyException {

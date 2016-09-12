@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.rmi.RemoteException;
 import java.util.Collection;
-import java.util.stream.Stream;
+import java.util.List;
 
 class BooksSearching extends LibraryAction {
 
@@ -26,7 +26,7 @@ class BooksSearching extends LibraryAction {
     @Override
     public void callback() {
         try {
-            Stream<CatalogPosition> catalogPositions = library.searchByTitle(readTitleFromUser());
+            List<CatalogPosition> catalogPositions = library.searchByTitle(readTitleFromUser());
             displayFoundPositions(catalogPositions);
         } catch (RemoteException e) {
             e.printStackTrace();
@@ -42,7 +42,7 @@ class BooksSearching extends LibraryAction {
         return reader.readLine();
     }
 
-    private void displayFoundPositions(Stream<CatalogPosition> catalogPositions) {
+    private void displayFoundPositions(List<CatalogPosition> catalogPositions) {
     	catalogPositions.forEach(position -> {
     		System.out.println(position.book.title + ", " + position.book.author);
             displayCopies(position.copies.values());
