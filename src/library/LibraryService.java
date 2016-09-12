@@ -66,7 +66,7 @@ class LibraryService implements Library {
     }
 
 	@Override
-	public List<Reader> findReadersByName(String name) {
+	public List<Reader> findReadersByName(String name) throws RemoteException {
 		String searchedNamePattern = normalizeStringPattern(name);
 		return readers.values().stream().filter(reader -> {
 			String fullName = String.format("*%s %s*", normalizeStringPattern(reader.firstName), normalizeStringPattern(reader.lastName));

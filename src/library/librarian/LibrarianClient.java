@@ -18,5 +18,6 @@ public class LibrarianClient extends Client {
     protected void addMenuPositions(Menu menu) {
         menu.addAction(new CreatingBook(library));
         menu.addAction(new CreatingCopy(library));
+        menu.addAction(new ReadersBrowsing(library));
     }
 }

@@ -17,7 +17,7 @@ public interface Library extends Remote {
     int create(Book book) throws RemoteException;
     int create(Copy copy) throws RemoteException, NoSuchElementException;
     List<CatalogPosition> findBooksByTitle(String title) throws RemoteException;
-    List<Reader> findReadersByName(String name);
+    List<Reader> findReadersByName(String name) throws RemoteException;
     int register(Reader reader) throws RemoteException;
     void order(int readerId, int signature, OrderNotification orderNotification) throws RemoteException, AlreadyOrderedException, NoSuchCopyException, NoSuchReaderException;
     void returnOrderedCopy(int readerId, int signature) throws RemoteException, NoSuchReaderException, NoSuchCopyException;
