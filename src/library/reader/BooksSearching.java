@@ -26,7 +26,7 @@ class BooksSearching extends LibraryAction {
     @Override
     public void callback() {
         try {
-            List<CatalogPosition> catalogPositions = library.searchByTitle(readTitleFromUser());
+            List<CatalogPosition> catalogPositions = library.findBooksByTitle(readTitleFromUser());
             displayFoundPositions(catalogPositions);
         } catch (RemoteException e) {
             e.printStackTrace();
@@ -44,7 +44,7 @@ class BooksSearching extends LibraryAction {
 
     private void displayFoundPositions(List<CatalogPosition> catalogPositions) {
     	catalogPositions.forEach(position -> {
-    		System.out.println(position.book.title + ", " + position.book.author);
+    		System.out.println(position.book.getId().toString() + " " + position.book.title + ", " + position.book.author);
             displayCopies(position.copies.values());
     	});
     }

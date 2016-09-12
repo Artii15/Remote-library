@@ -14,4 +14,8 @@ public class Book implements Serializable {
     public String title;
     public String author;
     public String description;
+    
+    public Integer getId() {
+    	return id;
+    }
 }

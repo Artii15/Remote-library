@@ -13,6 +13,7 @@ import java.rmi.RemoteException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 class LibraryService implements Library {
     private HashMap<Integer, Reader> readers = new HashMap<>();
@@ -37,7 +38,7 @@ class LibraryService implements Library {
     }
 
     @Override
-    public List<CatalogPosition> searchByTitle(String title) throws RemoteException {
+    public List<CatalogPosition> findBooksByTitle(String title) throws RemoteException {
         return catalog.searchByTitle(title);
     }
 
@@ -63,4 +64,17 @@ class LibraryService implements Library {
             orders.returnOrderedCopy(readerId, signature);
         }
     }
+
+	@Override
+	public List<Reader> findReadersByName(String name) {
+		String searchedNamePattern = normalizeStringPattern(name);
+		return readers.values().stream().filter(reader -> {
+			String fullName = String.format("*%s %s*", normalizeStringPattern(reader.firstName), normalizeStringPattern(reader.lastName));
+			return fullName.matches(searchedNamePattern);
+		}).collect(Collectors.toList());
+	}
+	
+	private String normalizeStringPattern(String pattern) {
+		return pattern.trim().toLowerCase();
+	}
 }
