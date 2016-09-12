@@ -11,8 +11,8 @@ import library.reader.*;
 
 import java.rmi.RemoteException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Stream;
 
 class LibraryService implements Library {
     private HashMap<Integer, Reader> readers = new HashMap<>();
@@ -37,7 +37,7 @@ class LibraryService implements Library {
     }
 
     @Override
-    public List<CatalogPosition> searchByTitle(String title) throws RemoteException {
+    public Stream<CatalogPosition> searchByTitle(String title) throws RemoteException {
         return catalog.searchByTitle(title);
     }
 

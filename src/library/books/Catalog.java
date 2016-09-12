@@ -3,8 +3,7 @@ package library.books;
 import library.exceptions.NoSuchCopyException;
 
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.stream.Stream;
 
 public class Catalog {
     private HashMap<Integer, CatalogPosition> positions = new HashMap<>();
@@ -30,17 +29,11 @@ public class Catalog {
         return positions.containsKey(bookId);
     }
 
-    public List<CatalogPosition> searchByTitle(String title) {
+    public Stream<CatalogPosition> searchByTitle(String title) {
         String normalizedTitle = title.toLowerCase().trim();
-        LinkedList<CatalogPosition> matchedPositions = new LinkedList<>();
-
-        positions.forEach((id, position) -> {
-            if(position.book.title.toLowerCase().trim().matches(String.format(".*%s.*", normalizedTitle))) {
-                matchedPositions.add(position);
-            }
+        return positions.values().stream().filter(position -> {
+        	return position.book.title.toLowerCase().trim().matches(String.format(".*%s.*", normalizedTitle));
         });
-
-        return matchedPositions;
     }
 
     public Copy getCopy(int signature) throws NoSuchCopyException {

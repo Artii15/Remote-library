@@ -6,7 +6,11 @@ import library.reader.Reader;
 import java.io.Serializable;
 
 public class Order implements Serializable {
-    public Reader reader;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5785936386517989171L;
+	public Reader reader;
     public Copy copy;
     public OrderNotification notification;
 

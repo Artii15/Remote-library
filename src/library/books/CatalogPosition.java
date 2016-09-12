@@ -4,7 +4,11 @@ import java.io.Serializable;
 import java.util.HashMap;
 
 public class CatalogPosition implements Serializable {
-    public Book book;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1739314249972286038L;
+	public Book book;
     public HashMap<Integer, Copy> copies = new HashMap<>();
 
     CatalogPosition(Book book) {
