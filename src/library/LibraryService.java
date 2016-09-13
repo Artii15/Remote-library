@@ -67,10 +67,10 @@ class LibraryService implements Library {
 
 	@Override
 	public List<Reader> findReadersByName(String name) throws RemoteException {
-		String searchedNamePattern = normalizeStringPattern(name);
+		String searchedNamePattern = String.format(".*%s.*", normalizeStringPattern(name));
 		return readers.values().stream().filter(reader -> {
-			String fullName = String.format("*%s %s*", normalizeStringPattern(reader.firstName), normalizeStringPattern(reader.lastName));
-			return fullName.matches(searchedNamePattern);
+			String fullName = String.format("%s %s", reader.firstName, reader.lastName);
+			return normalizeStringPattern(fullName).matches(searchedNamePattern);
 		}).collect(Collectors.toList());
 	}
 	

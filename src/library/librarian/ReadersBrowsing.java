@@ -7,7 +7,6 @@ import java.rmi.RemoteException;
 import java.util.List;
 
 import library.Library;
-import library.books.CatalogPosition;
 import library.menu.LibraryAction;
 import library.reader.Reader;
 

@@ -20,6 +20,7 @@ public class Menu {
         }
         catch (Exception e) {
             System.out.println("Invalid action chosen");
+            e.printStackTrace();
         }
     }
 
