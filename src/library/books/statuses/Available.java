@@ -1,6 +1,10 @@
 package library.books.statuses;
 
-public class Available extends Status {
+import java.io.Serializable;
+
+public class Available extends Status implements Serializable {
+	
+	private static final long serialVersionUID = 4202697928940275335L;
 
 	@Override
 	public String display() {
