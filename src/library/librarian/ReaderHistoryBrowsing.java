@@ -52,7 +52,7 @@ public class ReaderHistoryBrowsing extends LibraryAction {
 		System.out.println("Borrows history:");
 		history.forEach(borrow -> {
 			System.out.println(String.format(
-					"%d %s %d %s", 
+					"\t %d %s %d %s", 
 					borrow.book.getId(), borrow.book.title, borrow.copy.signature, borrow.creationDate));
 		});
 	}
