@@ -44,14 +44,14 @@ class BooksSearching extends LibraryAction {
 
     private void displayFoundPositions(List<CatalogPosition> catalogPositions) {
     	catalogPositions.forEach(position -> {
-    		System.out.println(position.book.getId().toString() + " " + position.book.title + ", " + position.book.author);
+    		System.out.println(String.format("%d %s %s", position.book.getId(), position.book.title, position.book.author));
             displayCopies(position.copies.values());
     	});
     }
 
     private void displayCopies(Collection<Copy> copies) {
         for(Copy copy: copies) {
-            System.out.println("\t" + copy.signature + " " + copy.publisher + " " + copy.status);
+            System.out.println(String.format("\t %d %s %s", copy.signature, copy.publisher, copy.status.display()));
         }
     }
 }
