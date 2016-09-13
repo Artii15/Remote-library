@@ -6,48 +6,46 @@ import java.io.InputStreamReader;
 import java.rmi.RemoteException;
 
 import library.Library;
+import library.books.Copy;
+import library.exceptions.NoSuchCopyException;
 import library.exceptions.NoSuchReaderException;
 import library.menu.LibraryAction;
 import library.reader.Reader;
 
-public class ShowingReader extends LibraryAction {
+public class ShowingCopy extends LibraryAction {
 
-	public ShowingReader(Library library) {
+	public ShowingCopy(Library library) {
 		super(library);
 	}
 
 	@Override
 	public String getLabel() {
-		return "Show reader";
+		return "Display information about copy";
 	}
 
 	@Override
 	public void callback() {
 		try {
-            Reader reader = library.getReader(readReaderId());
-            displayReader(reader);
+            Copy copy = library.getCopy(readSignature());
+            displayCopy(copy);
         } catch (RemoteException e) {
             e.printStackTrace();
             System.out.println("Library temporary unavailable. Try again later.");
         } catch (IOException e) {
             System.out.println("Invalid data provided");
-        } catch (NoSuchReaderException e) {
-			System.out.println("Reader with provided id does not exist");
+        } catch (NoSuchCopyException e) {
+			System.out.println("Copy with provided signature does not exist");
 			e.printStackTrace();
 		}
 	}
 
-	private int readReaderId() throws IOException {
-        System.out.print("Reader id: ");
+	private int readSignature() throws IOException {
+        System.out.print("Copy signature: ");
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         return Integer.parseInt(reader.readLine());
     }
 	
-	private void displayReader(Reader reader) {
-		System.out.println(String.format("%d %s %s", reader.id, reader.firstName, reader.lastName));
-		reader.possessedCopies.values().forEach(possessedCopy -> {
-			System.out.println(String.format("\t %s %d", 
-					possessedCopy.book.title, possessedCopy.copy.signature));
-		});
+	private void displayCopy(Copy copy) {
+		System.out.println(String.format("%d %s", copy.signature, copy.status.display()));
 	}
 }
