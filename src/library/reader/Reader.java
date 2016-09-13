@@ -1,6 +1,7 @@
 package library.reader;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.HashSet;
 
 public class Reader implements Serializable {
@@ -15,4 +16,5 @@ public class Reader implements Serializable {
     public String firstName;
     public String lastName;
     public HashSet<Integer> orderedCopies = new HashSet<>();
+    public HashMap<Integer, PossessedCopy> possessedCopies = new HashMap<>();
 }

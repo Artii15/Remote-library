@@ -1,5 +1,6 @@
 package library.books;
 
+import library.books.statuses.Status;
 import library.exceptions.NoSuchCopyException;
 
 import java.util.HashMap;

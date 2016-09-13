@@ -2,6 +2,9 @@ package library.books;
 
 import java.io.Serializable;
 
+import library.books.statuses.Status;
+import library.reader.Reader;
+
 public class Copy implements Serializable {
     /**
 	 * 
@@ -16,4 +19,5 @@ public class Copy implements Serializable {
     public String publisher;
     public String  releaseDate;
     public Status status;
+    public Reader temporaryOwner = null;
 }

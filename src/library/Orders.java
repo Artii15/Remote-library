@@ -2,7 +2,7 @@ package library;
 
 import library.books.Catalog;
 import library.books.Copy;
-import library.books.Status;
+import library.books.statuses.Status;
 import library.exceptions.AlreadyOrderedException;
 import library.exceptions.NoSuchCopyException;
 import library.exceptions.NoSuchReaderException;
