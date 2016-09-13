@@ -9,14 +9,16 @@ import library.exceptions.NoSuchCopyException;
 import library.exceptions.NoSuchReaderException;
 import library.reader.*;
 
+import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
-class LibraryService implements Library {
-    private HashMap<Integer, Reader> readers = new HashMap<>();
+class LibraryService implements Library, Serializable {
+	private static final long serialVersionUID = 2405177588815656302L;
+	private HashMap<Integer, Reader> readers = new HashMap<>();
     private Catalog catalog = new Catalog();
     private Borrows borrows = new Borrows(catalog);
     private Orders orders = new Orders(readers, catalog, borrows);

@@ -8,9 +8,7 @@ import java.rmi.RemoteException;
 import library.Library;
 import library.books.Copy;
 import library.exceptions.NoSuchCopyException;
-import library.exceptions.NoSuchReaderException;
 import library.menu.LibraryAction;
-import library.reader.Reader;
 
 public class ShowingCopy extends LibraryAction {
 
