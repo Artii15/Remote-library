@@ -1,10 +1,13 @@
 package library.reader;
 
+import java.io.Serializable;
+
 import library.books.Book;
 import library.books.Copy;
 
-public class PossessedCopy {
-
+public class PossessedCopy implements Serializable {
+	
+	private static final long serialVersionUID = 3374352162420538024L;
 	public Book book;
 	public Copy copy;
 	
