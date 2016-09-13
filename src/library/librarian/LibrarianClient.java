@@ -19,5 +19,6 @@ public class LibrarianClient extends Client {
         menu.addAction(new CreatingBook(library));
         menu.addAction(new CreatingCopy(library));
         menu.addAction(new ReadersBrowsing(library));
+        menu.addAction(new ReaderHistoryBrowsing(library));
     }
 }

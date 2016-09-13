@@ -75,7 +75,7 @@ class LibraryService implements Library {
 	}
 
 	@Override
-	public List<Borrow> getReaderBorrows(int readerId) throws RemoteException, NoSuchReaderException {
+	public List<Borrow> getReaderBorrowsHistory(int readerId) throws RemoteException, NoSuchReaderException {
 		if(readers.containsKey(readerId)) {
 			return borrows.getReaderBorrows(readerId);
 		}
@@ -85,7 +85,7 @@ class LibraryService implements Library {
 	}
 
 	@Override
-	public List<Borrow> getCopyBorrows(int signature) throws RemoteException, NoSuchCopyException {
+	public List<Borrow> getCopyBorrowsHistory(int signature) throws RemoteException, NoSuchCopyException {
 		if(catalog.containsCopy(signature)) {
 			return borrows.getCopyBorrows(signature);
 		}
