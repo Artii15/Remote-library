@@ -21,4 +21,6 @@ public interface Library extends Remote {
     int register(Reader reader) throws RemoteException;
     void order(int readerId, int signature, OrderNotification orderNotification) throws RemoteException, AlreadyOrderedException, NoSuchCopyException, NoSuchReaderException;
     void returnOrderedCopy(int readerId, int signature) throws RemoteException, NoSuchReaderException, NoSuchCopyException;
+    List<Borrow> getReaderBorrows(int readerId) throws RemoteException, NoSuchReaderException;
+    List<Borrow> getCopyBorrows(int signature) throws RemoteException, NoSuchCopyException;
 }

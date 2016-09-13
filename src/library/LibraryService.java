@@ -18,8 +18,8 @@ import java.util.stream.Collectors;
 class LibraryService implements Library {
     private HashMap<Integer, Reader> readers = new HashMap<>();
     private Catalog catalog = new Catalog();
-    private Orders orders = new Orders(readers, catalog);
     private Borrows borrows = new Borrows(catalog);
+    private Orders orders = new Orders(readers, catalog, borrows);
     private final Object readersLock = new Object();
 
     @Override
@@ -29,7 +29,7 @@ class LibraryService implements Library {
 
     @Override
     public int create(Copy copy) throws RemoteException, NoSuchElementException {
-        if(catalog.contains(copy.bookId)) {
+        if(catalog.containsBook(copy.bookId)) {
             return catalog.insert(copy);
         }
         else {
@@ -72,5 +72,25 @@ class LibraryService implements Library {
 	
 	private String normalizeStringPattern(String pattern) {
 		return pattern.trim().toLowerCase();
+	}
+
+	@Override
+	public List<Borrow> getReaderBorrows(int readerId) throws RemoteException, NoSuchReaderException {
+		if(readers.containsKey(readerId)) {
+			return borrows.getReaderBorrows(readerId);
+		}
+		else {
+			throw new NoSuchReaderException();
+		}
+	}
+
+	@Override
+	public List<Borrow> getCopyBorrows(int signature) throws RemoteException, NoSuchCopyException {
+		if(catalog.containsCopy(signature)) {
+			return borrows.getCopyBorrows(signature);
+		}
+		else {
+			throw new NoSuchCopyException();
+		}
 	}
 }

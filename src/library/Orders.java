@@ -17,10 +17,12 @@ public class Orders {
     private LinkedList<Order> orders = new LinkedList<>();
     private Map<Integer, Reader> readers;
     private Catalog catalog;
+    private Borrows borrows;
 
-    public Orders(Map<Integer, Reader> readers, Catalog catalog) {
+    public Orders(Map<Integer, Reader> readers, Catalog catalog, Borrows borrows) {
         this.readers = readers;
         this.catalog = catalog;
+        this.borrows = borrows;
     }
 
     public synchronized void addOrder(int readerId, int signature, library.OrderNotification orderNotification) throws NoSuchReaderException, NoSuchCopyException, AlreadyOrderedException {
@@ -53,6 +55,7 @@ public class Orders {
                 order.copy.status = Status.BORROWED;
                 try {
                     order.notification.notify(order);
+                    borrows.addBorrow(order.reader, order.copy);
                 }
                 catch (RemoteException e) {
                     order.reader.orderedCopies.remove(order.copy.signature);

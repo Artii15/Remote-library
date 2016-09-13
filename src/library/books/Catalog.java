@@ -26,14 +26,14 @@ public class Catalog {
         return copy.signature;
     }
 
-    public boolean contains(int bookId) {
+    public boolean containsBook(int bookId) {
         return positions.containsKey(bookId);
     }
     
     public Book getBook(int bookId) {
     	return positions.get(bookId).book;
     }
-
+    
     public List<CatalogPosition> searchByTitle(String title) {
         String normalizedTitle = title.toLowerCase().trim();
         return positions.values().stream().filter(position -> {
@@ -41,6 +41,10 @@ public class Catalog {
         }).collect(Collectors.toList());
     }
 
+    public boolean containsCopy(int signature) {
+    	return copies.containsKey(signature);
+    }
+    
     public Copy getCopy(int signature) throws NoSuchCopyException {
         if(!copies.containsKey(signature)) {
             throw new NoSuchCopyException();

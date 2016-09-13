@@ -10,25 +10,25 @@ import library.reader.Reader;
 
 public class Borrows {
 	private Catalog catalog;
-	private HashMap<Integer, List<Borrow>> booksBorrows = new HashMap<>();
+	private HashMap<Integer, List<Borrow>> copiesBorrows = new HashMap<>();
 	private HashMap<Integer, List<Borrow>> readersBorrows = new HashMap<>();
 	
 	public Borrows(Catalog catalog) {
 		this.catalog = catalog;
 	}
 	
-	public synchronized void borrow(Reader reader, Copy copy) {
+	public synchronized void addBorrow(Reader reader, Copy copy) {
 		Borrow borrow = new Borrow(reader, catalog.getBook(copy.bookId), copy);
 		
-		if(!booksBorrows.containsKey(copy.bookId)) {
-			booksBorrows.put(copy.bookId, new LinkedList<Borrow>());
+		if(!copiesBorrows.containsKey(copy.signature)) {
+			copiesBorrows.put(copy.signature, new LinkedList<Borrow>());
 		}
 		
 		if(!readersBorrows.containsKey(reader.id)) {
 			readersBorrows.put(reader.id, new LinkedList<Borrow>());
 		}
 		
-		booksBorrows.get(copy.bookId).add(borrow);
+		copiesBorrows.get(copy.signature).add(borrow);
 		readersBorrows.get(reader.id).add(borrow);
 	}
 	
@@ -36,7 +36,7 @@ public class Borrows {
 		return readersBorrows.get(readerId);
 	}
 	
-	public List<Borrow> getBookBorrows(int bookId) {
-		return booksBorrows.get(bookId);
+	public List<Borrow> getCopyBorrows(int signature) {
+		return copiesBorrows.get(signature);
 	}
 }
