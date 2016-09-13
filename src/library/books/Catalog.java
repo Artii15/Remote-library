@@ -29,6 +29,10 @@ public class Catalog {
     public boolean contains(int bookId) {
         return positions.containsKey(bookId);
     }
+    
+    public Book getBook(int bookId) {
+    	return positions.get(bookId).book;
+    }
 
     public List<CatalogPosition> searchByTitle(String title) {
         String normalizedTitle = title.toLowerCase().trim();
