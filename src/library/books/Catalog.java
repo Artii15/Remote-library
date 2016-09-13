@@ -1,6 +1,6 @@
 package library.books;
 
-import library.books.statuses.Status;
+import library.books.statuses.Available;
 import library.exceptions.NoSuchCopyException;
 
 import java.util.HashMap;
@@ -20,7 +20,7 @@ public class Catalog {
 
     public synchronized int insert(Copy copy) {
         copy.signature = ++Copy.highestSignature;
-        copy.status = Status.AVAILABLE;
+        copy.status = new Available();
         positions.get(copy.bookId).addCopy(copy);
         copies.put(copy.signature, copy);
 

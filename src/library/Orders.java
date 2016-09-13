@@ -2,7 +2,8 @@ package library;
 
 import library.books.Catalog;
 import library.books.Copy;
-import library.books.statuses.Status;
+import library.books.statuses.Available;
+import library.books.statuses.Borrowed;
 import library.exceptions.AlreadyOrderedException;
 import library.exceptions.NoSuchCopyException;
 import library.exceptions.NoSuchReaderException;
@@ -50,16 +51,16 @@ public class Orders {
         Iterator<Order> it = orders.iterator();
         while (it.hasNext()) {
             Order order = it.next();
-            if(order.copy.status == Status.AVAILABLE) {
+            if(order.copy.status instanceof Available) {
                 it.remove();
-                order.copy.status = Status.BORROWED;
+                order.copy.status = new Borrowed(order.reader);
                 try {
                     order.notification.notify(order);
                     borrows.addBorrow(order.reader, order.copy);
                 }
                 catch (RemoteException e) {
                     order.reader.orderedCopies.remove(order.copy.signature);
-                    order.copy.status = Status.AVAILABLE;
+                    order.copy.status = new Available();
                 }
             }
         }
@@ -75,7 +76,7 @@ public class Orders {
         }
 
         reader.orderedCopies.remove(signature);
-        catalog.getCopy(signature).status = Status.AVAILABLE;
+        catalog.getCopy(signature).status = new Available();
         realizeOrders();
     }
 }

@@ -14,5 +14,4 @@ public class Borrowed extends Status {
 	public String display() {
 		return String.format("Borrowed by: %d %s %s", owner.id, owner.firstName, owner.lastName);
 	}
-
 }
