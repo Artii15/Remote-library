@@ -93,4 +93,24 @@ class LibraryService implements Library {
 			throw new NoSuchCopyException();
 		}
 	}
+
+	@Override
+	public Reader getReader(int readerId) throws RemoteException, NoSuchReaderException {
+		if(readers.containsKey(readerId)) {
+			return readers.get(readerId);
+		}
+		else {
+			throw new NoSuchReaderException();
+		}
+	}
+
+	@Override
+	public Copy getCopy(int signature) throws RemoteException, NoSuchCopyException {
+		if(catalog.containsCopy(signature)) {
+			return catalog.getCopy(signature);
+		}
+		else {
+			throw new NoSuchCopyException();
+		}
+	}
 }
