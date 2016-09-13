@@ -33,10 +33,14 @@ public class Borrows {
 	}
 	
 	public List<Borrow> getReaderBorrows(int readerId) {
-		return readersBorrows.get(readerId);
+		return getBorrows(readersBorrows.get(readerId));
 	}
 	
 	public List<Borrow> getCopyBorrows(int signature) {
-		return copiesBorrows.get(signature);
+		return getBorrows(copiesBorrows.get(signature));
+	}
+	
+	private List<Borrow> getBorrows(List<Borrow> borrows) {
+		return borrows == null ? new LinkedList<>() : borrows;
 	}
 }
