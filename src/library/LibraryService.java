@@ -19,8 +19,8 @@ class LibraryService implements Library {
     private HashMap<Integer, Reader> readers = new HashMap<>();
     private Catalog catalog = new Catalog();
     private Orders orders = new Orders(readers, catalog);
+    private Borrows borrows = new Borrows(catalog);
     private final Object readersLock = new Object();
-    private final Object ordersLock = new Object();
 
     @Override
     public int create(Book book) throws RemoteException {
@@ -53,16 +53,12 @@ class LibraryService implements Library {
 
     @Override
     public void order(int readerId, int signature, library.OrderNotification orderNotification) throws RemoteException, AlreadyOrderedException, NoSuchCopyException, NoSuchReaderException {
-        synchronized (ordersLock) {
-            orders.addOrder(readerId, signature, orderNotification);
-        }
+    	orders.addOrder(readerId, signature, orderNotification);
     }
 
     @Override
     public void returnOrderedCopy(int readerId, int signature) throws RemoteException, NoSuchReaderException, NoSuchCopyException {
-        synchronized (ordersLock) {
-            orders.returnOrderedCopy(readerId, signature);
-        }
+    	orders.returnOrderedCopy(readerId, signature);
     }
 
 	@Override

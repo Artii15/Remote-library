@@ -23,7 +23,7 @@ public class Orders {
         this.catalog = catalog;
     }
 
-    public void addOrder(int readerId, int signature, library.OrderNotification orderNotification) throws NoSuchReaderException, NoSuchCopyException, AlreadyOrderedException {
+    public synchronized void addOrder(int readerId, int signature, library.OrderNotification orderNotification) throws NoSuchReaderException, NoSuchCopyException, AlreadyOrderedException {
         if(!readers.containsKey(readerId)) {
             throw new NoSuchReaderException();
         }
@@ -62,7 +62,7 @@ public class Orders {
         }
     }
 
-    public void returnOrderedCopy(int readerId, int signature) throws NoSuchReaderException, NoSuchCopyException {
+    public synchronized void returnOrderedCopy(int readerId, int signature) throws NoSuchReaderException, NoSuchCopyException {
         if(!readers.containsKey(readerId)) {
             throw new NoSuchReaderException();
         }
