@@ -57,6 +57,8 @@ public class Orders {
                 try {
                     order.notification.notify(order);
                     borrows.addBorrow(order.reader, order.copy);
+                    order.reader.possessedCopies.put(order.copy.signature, 
+                    		new PossessedCopy(catalog.getBook(order.copy.bookId), order.copy));
                 }
                 catch (RemoteException e) {
                     order.reader.orderedCopies.remove(order.copy.signature);
@@ -76,6 +78,7 @@ public class Orders {
         }
 
         reader.orderedCopies.remove(signature);
+        reader.possessedCopies.remove(signature);
         catalog.getCopy(signature).status = new Available();
         realizeOrders();
     }
